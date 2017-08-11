@@ -61,7 +61,7 @@
            </div>
             
        <button type="submit" name="addLibro" class="btn btn-success btn-block">Guardar contacto</button>
-       <a href="vista_index.php" class="btn btn-default btn-block">Cancelar</a>
+       <a href="<?php echo base_url()?>index.php/agenda/" class="btn btn-default btn-block">Cancelar</a>
       </fieldset>
       </form>     
       </div>

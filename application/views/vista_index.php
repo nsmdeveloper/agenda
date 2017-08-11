@@ -52,8 +52,8 @@
               <p class="desc"><?= $contacto->movil ?></p>
               <p class="desc"><?= $contacto->email ?></p>
               <ul>
-                <li style="width:22%;"><a href="" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a></li>
-                <li style="width:22%;"><a href="" data-toggle="tooltip" title="Eliminar"><i class=" fa fa-window-close-o"></i></a></li>
+                <li style="width:22%;"><a href="<?php echo base_url()?>index.php/agenda/edit/<?=$contacto->id ?>" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></a></li>
+                <li style="width:22%;"><a href="javascript:eliminarContacto(<?=$contacto->id?>)" data-toggle="tooltip" title="Eliminar"><i class=" fa fa-window-close-o"></i></a></li>
                 <li style="width:22%;">1 <span class="fa fa-phone"></span></li>
                 <li style="width:22%;">103 <span class="fa fa-envelope"></span></li>
                 <li style="width:8%;">&nbsp;</li>
@@ -78,6 +78,18 @@
     </div>
   </div>
 </div>
+<script>
+function eliminarContacto($id) {
+
+ var eliminar =  confirm('Eliminar contacto?');
+
+ if (eliminar === true) {
+      alert('Esta funcion aun no ha sido desarrollada.');
+ }
+
+}
+
+</script>
       <!-- Contendor -->
   <!--Seccion de Footer-->
 <?php $this->load->view('footer');?>

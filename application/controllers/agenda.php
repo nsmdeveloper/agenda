@@ -169,6 +169,25 @@ class Agenda extends CI_Controller {
 
 	/** Metodo edit **/
 	/**
+	*Descripcion: Este metodo se encarga de cargar el formulario
+	* de editar contacto.
+	**/
+	/**
+	 * @param $id_contacto
+	 * @return vista
+	*/
+	public function edit($id_contacto) {
+
+		$data = array();
+		$data['titulo'] = "Agenda Telefonica | Editar Contactos";
+		$data['contacto'] = $this->agenda_model->getContacto($id_contacto); 
+
+		$this->load->view('edit_contacto', $data);
+
+	}
+
+	/** Metodo update **/
+	/**
 	*Descripcion: Este metodo se encarga de editar un
 	* contacto en especifico
 	**/
@@ -176,9 +195,52 @@ class Agenda extends CI_Controller {
 	 * @param $id
 	 * @return vista
 	*/
-	public function edit($id_usuario = 0) {
+	public function update() {
 
 		//Metodo para editar un contacto en especifico
+		$id_contacto = $this->input->post("id_contacto");
+		$nombre = $this->input->post("nombre");
+		$apellido = $this->input->post("apellido");
+		$movil = $this->input->post("movil");
+		$email = $this->input->post("email");
+		$social1 = $this->input->post("social1");
+		$social2 = $this->input->post("social2");
+		$social3 = $this->input->post("social3");
+		
+		//Sanear los datos recibidos
+		$nombre = htmlspecialchars($nombre);
+		$apellido = htmlspecialchars($apellido);
+		$movil = htmlspecialchars($movil);
+		$email = htmlspecialchars($email);
+		$social1 = htmlspecialchars($social1);
+		$social2 = htmlspecialchars($social2);
+		$social3 = htmlspecialchars($social3);
+
+		//Crear un array con los datos del contacto recivido.
+		$contacto = array(
+			'nombre' => $nombre,
+			'apellido' => $apellido,
+			'movil' => $movil,
+			'email' => $email,
+			'social1' => $social1,
+			'social2' => $social2,	
+			'social3' => $social3	
+		);
+
+		//Guardar los datos del contacto.
+		
+
+		if ( $this->agenda_model->editarContacto($id_contacto, $contacto) ) {
+
+			$this->session->set_flashdata('success', 'Contacto Editado exitosamente!');
+
+		} else {
+
+			$this->session->set_flashdata('error', 'Error al tratar de editar contacto!');
+
+		}
+
+		redirect(base_url() . "index.php/agenda/edit/$id_contacto");
 
 	
 	}

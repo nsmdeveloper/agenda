@@ -67,6 +67,7 @@ class Agenda_Model extends CI_Model {
 	public function getTodosContacto($id_usuario = 1) {
 
 		//Metodo para mostrar un contacto en especifico
+		$this->db->order_by('id','desc');
 		$contactos = $this->db->get_where('contactos', array('id_usuario' => $id_usuario));
 		
 		return $contactos->result();
@@ -82,9 +83,12 @@ class Agenda_Model extends CI_Model {
 	 * @param $id
 	 * @return void
 	 */
-	public function getContacto($id_contacto, $id_usuario) {
+	public function getContacto($id_contacto) {
 
 		//Metodo para mostrar un contacto en especifico
+		$contacto = $this->db->get_where('contactos', array('id' => $id_contacto));
+		
+		return $contacto->result();
 
 		
 
@@ -99,9 +103,11 @@ class Agenda_Model extends CI_Model {
 	 * @param $id
 	 * @return void
 	*/
-	public function editarContacto($id_contacto, $id_usuario) {
+	public function editarContacto($id_contacto, $contacto = array()) {
 
 		//Metodo para editar un contacto en especifico
+		$this->db->where('id', $id_contacto);
+		return $this->db->update('contactos', $contacto); 
 
 	
 	}
